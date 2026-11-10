@@ -1,0 +1,62 @@
+RewriteEngine on
+
+# Fichiers ou dossiers reels (css, js, images, pdf, zip, etc): pas de reecriture
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+#----------------------------
+# REGLE DE RE-ECRITURE
+
+# ROUTE DES CATEGORIES
+
+# ROUTE CATEGORIES.SHOW
+# PATTERN categories/id/slug(title).html
+# TARGET : index.php?categories=show&id=x
+
+RewriteRule ^categories\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.php?categories=show&id=$1 [L,QSA]
+
+#--------------------------------------------
+# ROUTE DES TAGS
+
+# ROUTE TAGS.SHOW
+# PATTERN tags/id/slug(title).html
+# TARGET : index.php?tags=show&id=x
+
+RewriteRule ^tags\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.php?tags=show&id=$1 [L,QSA]
+
+#--------------------------------------------
+# ROUTE DES AUTHORS
+
+# ROUTE AUTHORS.SHOW
+# PATTERN authors/id/slug(title).html
+# TARGET : index.php?authors=show&id=x
+
+RewriteRule ^authors\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.php?authors=show&id=$1 [L,QSA]
+
+# ROUTE AUTHORS.INDEX
+# PATTERN authorss/index.html
+# TARGET : index.php?authorss=index
+
+RewriteRule ^authors/index\.html$ index.php?authors=index [L,QSA]
+
+#--------------------------------------------
+# ROUTE DES BOOKS
+
+# ROUTE BOOKS.SHOW
+# PATTERN books/id/slug(title).html
+# TARGET : index.php?books=show&id=x
+
+RewriteRule ^books\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.php?books=show&id=$1 [L,QSA]
+
+# ROUTE BOOKS.INDEX
+# PATTERN books/index.html
+# TARGET : index.php?books=index
+
+RewriteRule ^books/index\.html$ index.php?books=index [L,QSA]
+
+#-----------------------------
+# FALLBACK
+# toute autre URL non prise en charge retour vers index.php
+
+RewriteRule ^ index.php [L]
