@@ -1,0 +1,17 @@
+{
+    "name": "olivi/book_hunter_poo_2026",
+    "autoload": {
+        "psr-4": {
+            "App\\Controllers\\": "app/controllers/",
+            "App\\Models\\": "app/models/",
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "olivier blanche",
+            "email": "olivierblanche@gmail.com"
+        }
+    ],
+    "require": {}
+}

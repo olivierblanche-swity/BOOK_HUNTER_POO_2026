@@ -1,18 +1,27 @@
 <?php
 
-namespace App\Controllers\PagesController; 
+namespace App\Controllers; 
 
 use \PDO;
 use \App\Models\BooksModel;
-use \App\Models\AuthorsModel;
 
-function indexAction(PDO $conn)
+
+
+class PagesController {
+
+public function homeAction(PDO $conn):void
 {
-    include_once '../app/models/postsModel.php';
+    include_once '../app/models/booksModel.php';
+
+    $books = BooksModel\findAll($conn, 3);
+
     
     global $title, $content;
-    $title = "Accueil";
+    $title = "Latest Books & Authors";
     ob_start();
-    include '../app/views/pages/index.php';
+    include '../app/views/pages/home.php';
     $content = ob_get_clean();
 }
+
+}
+
