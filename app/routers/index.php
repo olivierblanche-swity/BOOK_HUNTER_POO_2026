@@ -1,12 +1,11 @@
 <?php
 
-/**
-      * 1  route par defaut
-      * PATTERN: /
-      * CTRL:pagesController
-      * ACTION: index
-      * 
-      */
+namespace Root;
 
-     include_once '../app/controllers/pagesController.php';
-     \App\Controllers\PagesController\homeAction($conn);
+use \App\Controllers;
+
+
+
+Controllers\PagesController::homeAction();
+
+

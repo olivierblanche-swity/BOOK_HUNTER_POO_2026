@@ -3,17 +3,17 @@
 namespace App\Controllers; 
 
 use \PDO;
-use \App\Models\BooksModel;
+use \App\Models\BooksManager;
 
 
 
 class BooksController {
 
-public function homeAction(PDO $conn):void
+public function indexAction():void
 {
-    include_once '../app/models/booksModel.php';
+    
 
-    $books = BooksModel\findAll($conn, 3);
+    $books = BooksManager::findAll(9);
 
     
     global $title, $content;

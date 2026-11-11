@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Controllers; 
+namespace App\Controllers;
 
+use App\Models\AuthorsManager;
 use \PDO;
-use \App\Models\BooksModel;
+use \App\Models\BooksManager;
 
 
 
-class PagesController {
 
-public function homeAction(PDO $conn):void
+abstract class PagesController {
+
+public static function homeAction():void
 {
-    include_once '../app/models/booksModel.php';
-
-    $books = BooksModel\findAll($conn, 3);
+    $books = BooksManager::findAll(3);
+    $authors = AuthorsManager::findAll(3);
 
     
     global $title, $content;

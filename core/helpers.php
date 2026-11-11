@@ -27,6 +27,18 @@ abstract class Helpers
     // fonction pour faire les slug
     public static function slugify(string $text): string
     {
+        // Conversion explicite pour un résultat stable avec iconv sous Windows.
+        $text = strtr($text, [
+            'à' => 'a', 'â' => 'a', 'ä' => 'a', 'À' => 'a', 'Â' => 'a', 'Ä' => 'a',
+            'é' => 'e', 'è' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'É' => 'e', 'È' => 'e', 'Ê' => 'e', 'Ë' => 'e',
+            'î' => 'i', 'ï' => 'i', 'Î' => 'i', 'Ï' => 'i',
+            'ô' => 'o', 'ö' => 'o', 'Ô' => 'o', 'Ö' => 'o',
+            'ù' => 'u', 'û' => 'u', 'ü' => 'u', 'Ù' => 'u', 'Û' => 'u', 'Ü' => 'u',
+            'ç' => 'c', 'Ç' => 'c', 'ÿ' => 'y', 'Ÿ' => 'y',
+            'œ' => 'oe', 'Œ' => 'oe', 'æ' => 'ae', 'Æ' => 'ae',
+        ]);
+
         // Remplacer les caractères accentués par leur équivalent
         $text = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $text);
 
