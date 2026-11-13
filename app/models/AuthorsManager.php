@@ -27,6 +27,20 @@ abstract class AuthorsManager {
 
     }
 
+    public static function findOneById (int $id): Author
+    {
+        $sql = "SELECT au.*
+                FROM authors au 
+                WHERE id = :id;";
+
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':id', $id, PDO::PARAM_INT);
+        $rs->execute();
+
+        return $rs->fetchObject('\App\Models\Author');
+
+    }
+
 
 
 }

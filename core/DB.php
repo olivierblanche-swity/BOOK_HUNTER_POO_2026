@@ -3,7 +3,7 @@
 namespace Core;
 
 abstract class DB{
-    private static $connexion =null;
+    private static $connexion = null;
     private static $connexionIsDefined = false;
 
 public static function setConnexion() 

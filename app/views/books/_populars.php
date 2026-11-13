@@ -22,21 +22,19 @@
             />
             <div class="p-4">
             <div class="pb-4 flex flex-wrap gap-2">
-                <?php //foreach ($book['tags'] as $tag): ?>
-                <span
-                class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold mr-2"
-                >
-                <?php //echo htmlspecialchars($tag, ENT_QUOTES, 'UTF-8'); ?>
-                </span>
-                <?php //endforeach; ?>
+                <?php 
+                $tags = $book->tags; 
+                include '../app/views/tags/_index.php';
+                ?>
+
             </div>
             <h3 class="text-xl font-bold"><?php echo $book->title; ?></h3>
-            <h4 class="text mb-2 text-gray-400"><?php //echo $author->firstnameAuthors; ?> <?php //echo $author->lastnameAuthors; ?></h4>
+            <h4 class="text mb-2 text-gray-400"><?php echo $book->author->firstname; ?> <?php echo $book->author->lastname; ?></h4>
             <div class="flex items-center mb-2">
                 <span class="text-yellow-500 mr-1">
-                <i class="fas fa-star"></i
+                <i class="fas fa-star"></i>
                 </span>
-                <span>8.9</span>
+                <span><?php echo $book->notation; ?></span>
             </div>
 
             <p class="text-gray-400">

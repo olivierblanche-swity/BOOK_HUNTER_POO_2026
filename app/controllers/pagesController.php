@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AuthorsManager;
-use \PDO;
+
 use \App\Models\BooksManager;
 
 

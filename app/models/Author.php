@@ -2,7 +2,14 @@
 
 namespace App\Models;
 
-class Author {
+class Author extends \Core\Model
+{
 
-public $id, $firstname, $lastname, $biography, $picture, $created_at;
+protected $id, $firstname, $lastname, $biography, $picture, $created_at;
+
+protected $books;
+
+protected function setBooks () {
+    $this->books = BooksManager::findAllByAuthorId($this->id);
+}
 }

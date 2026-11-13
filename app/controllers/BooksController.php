@@ -2,7 +2,7 @@
 
 namespace App\Controllers; 
 
-use \PDO;
+
 use \App\Models\BooksManager;
 
 
