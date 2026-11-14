@@ -1,6 +1,6 @@
 <?php
-$categories = \App\Models\CategoriesManager::findAll(null, 'name');
-$tags = \App\Models\TagsManager::findAll(null, 'name');
+$categories = \App\Models\CategoriesManager::findAll(null, 'name', 'ASC');
+$tags = \App\Models\TagsManager::findAll(null, 'name', 'ASC');
 ?>
 
 <aside class="w-full md:w-1/4 p-3">

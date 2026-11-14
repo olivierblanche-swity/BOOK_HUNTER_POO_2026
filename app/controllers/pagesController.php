@@ -18,7 +18,7 @@ public static function homeAction():void
 
     
     global $title, $content;
-    $title = TITLE_HOME;
+    $title = \Core\Helpers::e(TITLE_HOME);
     ob_start();
     include __DIR__ . '/../views/pages/home.php';
     $content = ob_get_clean();

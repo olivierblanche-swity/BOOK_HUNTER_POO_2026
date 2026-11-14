@@ -1,6 +1,13 @@
+<?php 
+/**
+ * @var string $title
+ */
+?>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Book Hunter - <?php echo \Core\Helpers::e($title); ?></title>
+<!-- Les données du titre sont déjà échappées lors de sa construction. -->
+<title>Book Hunter - <?php echo $title; ?></title>
 <base href="<?php echo \Core\Helpers::e(PUBLIC_BASE_URL); ?>">
 <link
     rel="stylesheet"

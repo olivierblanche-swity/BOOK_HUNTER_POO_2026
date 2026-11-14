@@ -6,7 +6,11 @@
 
 
 <?php \Core\AppTemplate::section('title'); ?>
-<?php echo sprintf(TITLE_AUTHORS_SHOW, $author->firstname, $author->lastname); ?>
+<?php echo sprintf(
+    TITLE_AUTHORS_SHOW,
+    \Core\Helpers::e($author->firstname),
+    \Core\Helpers::e($author->lastname)
+); ?>
 <?php \Core\AppTemplate::stop(); ?>
 
 <?php \Core\AppTemplate::section('content'); ?>

@@ -2,7 +2,7 @@
 /** @var \App\Models\Tag $tag */
 ?>
 <?php \Core\AppTemplate::section('title'); ?>
-Tag : <?php echo $tag->name; ?>
+Tag : <?php echo \Core\Helpers::e($tag->name); ?>
 <?php \Core\AppTemplate::stop(); ?>
 
 <?php \Core\AppTemplate::section('content'); ?>

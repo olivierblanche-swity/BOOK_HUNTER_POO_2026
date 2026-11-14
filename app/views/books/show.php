@@ -6,7 +6,7 @@
 ?>
 
 <?php \Core\AppTemplate::section('title'); ?>
-<?php echo sprintf(TITLE_BOOKS_SHOW, $book->title); ?>
+<?php echo sprintf(TITLE_BOOKS_SHOW, \Core\Helpers::e($book->title)); ?>
 <?php \Core\AppTemplate::stop(); ?>
 
 

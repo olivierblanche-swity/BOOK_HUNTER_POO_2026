@@ -22,8 +22,8 @@ abstract class Manager
         return [$table, $model];
     }
 
-    // null désactive la limite ; sans DESC, le tri SQL est croissant.
-    public static function findAll(?int $limit = 10, string $orderBy = 'created_at'): array
+    // null désactive la limite ; par défaut, les ajouts les plus récents passent en premier.
+    public static function findAll(?int $limit = 10, string $orderBy = 'created_at', string $direction = 'DESC'): array
     {
         [$table, $model] = static::init();
         // Un nom de colonne ne se lie pas comme une valeur PDO : on le vérifie avant insertion.
@@ -34,10 +34,15 @@ abstract class Manager
         if ($limit !== null && $limit < 0) {
             throw new \InvalidArgumentException('La limite doit etre positive ou nulle.');
         }
+        // Le sens du tri est inséré dans le SQL : seules ces deux valeurs sont autorisées.
+        $direction = strtoupper($direction);
+        if (!in_array($direction, ['ASC', 'DESC'], true)) {
+            throw new \InvalidArgumentException('Sens de tri inconnu : ' . $direction);
+        }
 
         $sql = 'SELECT *
                 FROM `'. $table .'`
-                ORDER BY `' . $orderBy . '`';
+                ORDER BY `' . $orderBy . '` ' . $direction;
         if ($limit !== null) {
             $sql .= ' LIMIT :limit';
         }

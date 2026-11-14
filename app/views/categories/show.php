@@ -2,7 +2,7 @@
 /** @var \App\Models\Category $category */
 ?>
 <?php \Core\AppTemplate::section('title'); ?>
-Catégorie : <?php echo $category->name; ?>
+Catégorie : <?php echo \Core\Helpers::e($category->name); ?>
 <?php \Core\AppTemplate::stop(); ?>
 
 <?php \Core\AppTemplate::section('content'); ?>
