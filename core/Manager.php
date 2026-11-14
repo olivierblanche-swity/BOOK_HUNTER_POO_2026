@@ -57,9 +57,8 @@ abstract class Manager
         return $rs->fetchAll(PDO::FETCH_CLASS, $model);
     }
 
-    // À l'étape 21, prévoir aussi l'absence de résultat : fetchObject() peut renvoyer false,
-    // ce qui est actuellement incompatible avec le type de retour object.
-    public static function findOneById(int $id): object
+    // fetchObject() renvoie false si aucun enregistrement ne correspond.
+    public static function findOneById(int $id): object|false
     {
         [$table, $model] = static::init();
 

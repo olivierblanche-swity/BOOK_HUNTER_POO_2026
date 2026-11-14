@@ -11,16 +11,14 @@ abstract class DB{
 public static function setConnexion() 
 
 {
-    // Le drapeau évite une deuxième tentative, même si la première connexion a échoué.
+    // Le drapeau évite de recréer une connexion déjà initialisée.
     if (!SELF::$connexionIsDefined):
-        try {
-            // Les constantes de connexion sont définies dans app/config/params.php.
-            SELF::$connexion = new \PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME, DBUSER, DBPWD);
-            } 
-        catch (\PDOException $e) {
-            // Comportement actuel : affiche le détail de l'erreur (à retirer à l'étape 20).
-            echo $e->getMessage();
-            }
+        // Les constantes de connexion sont définies dans app/config/params.php.
+        SELF::$connexion = new \PDO(
+            'mysql:host=' . DBHOST . ';dbname=' . DBNAME,
+            DBUSER,
+            DBPWD
+        );
         SELF::$connexionIsDefined = true;
     endif;  
 }

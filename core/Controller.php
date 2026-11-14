@@ -41,6 +41,20 @@ abstract class Controller
         // Crée $book, $author, $category ou $tag selon le contrôleur appelé.
         ${$singular} = $manager::findOneById($id);
 
+        // Aucun résultat : affiche la page 404 puis quitte cette action.
+        if (${$singular} === false) {
+            static::notFoundAction();
+            return;
+        }
+
         include __DIR__ . '/../app/views/' . $table . '/show.php';
+    }
+
+    public static function notFoundAction(): void
+    {
+        // Le statut doit être défini avant l'envoi du HTML.
+        http_response_code(404);
+
+        include __DIR__ . '/../app/views/errors/404.php';
     }
 }

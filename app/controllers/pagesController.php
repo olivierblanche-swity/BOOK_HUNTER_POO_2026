@@ -9,7 +9,7 @@ use \App\Models\BooksManager;
 
 
 
-abstract class PagesController {
+abstract class PagesController extends \Core\Controller {
 
 public static function homeAction():void
 {
@@ -17,11 +17,8 @@ public static function homeAction():void
     $authors = AuthorsManager::findAllPopulars(3);
 
     
-    global $title, $content;
-    $title = \Core\Helpers::e(TITLE_HOME);
-    ob_start();
+    // La vue définit ses sections title et content, comme les autres pages.
     include __DIR__ . '/../views/pages/home.php';
-    $content = ob_get_clean();
 }
 
 }

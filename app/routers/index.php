@@ -1,37 +1,42 @@
 <?php
 
-namespace Root;
+use Core\Route;
+use App\Controllers\PagesController;
+use App\Controllers\BooksController;
+use App\Controllers\AuthorsController;
+use App\Controllers\CategoriesController;
+use App\Controllers\TagsController;
 
-use \App\Controllers;
+// Accueil : conserve aussi le lien index.html de la navigation.
+Route::add('#^(?:index\.html|index\.php)?$#', PagesController::class, 'homeAction');
 
-// ROUTE DES CATEGORIES
+// Listes : conserve la limite actuelle de six éléments.
+Route::add('#^books\.html$#', BooksController::class, 'indexAction', [6]);
+Route::add('#^authors\.html$#', AuthorsController::class, 'indexAction', [6]);
 
-if (isset($_GET['categories'])):
+// Détails : seul l'identifiant est capturé.
+Route::add(
+    '#^books/([1-9][0-9]*)/[0-9a-z](?:[a-z0-9\-]*[0-9a-z])*\.html$#',
+    BooksController::class,
+    'showAction'
+);
+Route::add(
+    '#^authors/([1-9][0-9]*)/[0-9a-z](?:[a-z0-9\-]*[0-9a-z])*\.html$#',
+    AuthorsController::class,
+    'showAction'
+);
+Route::add(
+    '#^categories/([1-9][0-9]*)/[0-9a-z](?:[a-z0-9\-]*[0-9a-z])*\.html$#',
+    CategoriesController::class,
+    'showAction'
+);
+Route::add(
+    '#^tags/([1-9][0-9]*)/[0-9a-z](?:[a-z0-9\-]*[0-9a-z])*\.html$#',
+    TagsController::class,
+    'showAction'
+);
 
-    include_once __DIR__ . '/categories.php';
+// Dernière route : toute URL non reconnue affiche la page 404.
+Route::add('#^.*$#s', PagesController::class, 'notFoundAction');
 
-//ROUTE DES TAGS
-
-elseif (isset($_GET['tags'])):
-
-    include_once __DIR__ . '/tags.php';
-
-// ROUTE DES BOOKS
-
-elseif (isset($_GET['books'])):
-
-    include_once __DIR__ . '/books.php';
-
-// ROUTE DES AUTHORS
-
-elseif (isset($_GET['authors'])):
-
-    include_once __DIR__ . '/authors.php';
-
-else :
-    
-//ROUTE HOMEPAGE
-
-Controllers\PagesController::homeAction();
-
-endif;
+Route::dispatch();
