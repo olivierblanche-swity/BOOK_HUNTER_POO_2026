@@ -6,6 +6,20 @@ use Core\DB;
 
 abstract class AuthorsManager {
 
+    public static function findNotationByAuthorId(int $id)
+    {
+        $sql = 'SELECT ROUND(AVG(un.note), 1)
+                FROM books b
+                JOIN users_notations un ON un.book_id = b.id
+                WHERE b.author_id = :id;';
+
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':id', $id, PDO::PARAM_INT);
+        $rs->execute();
+
+        return $rs->fetchColumn();
+    }
+
 
     public static function findAllPopulars(int $limit = 9): array
     {
