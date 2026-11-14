@@ -1,5 +1,5 @@
 <?php
-/** @var array $tags */
+/** Fragment du nuage de tags affiché dans l'aside. @var array $tags */
 $tagSizes = ['text-sm', 'text-base', 'text-lg', 'text-xl'];
 ?>
 

@@ -1,19 +1,8 @@
 <?php
 
-namespace App\Controllers; 
+namespace App\Controllers;
 
-
-
-
-
-
-abstract class BooksController extends \Core\Controller {
-
-protected static $table = 'books';
-protected static $Manager = \App\Models\BooksManager::class;
-
-
-
-
-
+/** Les actions et leur configuration sont déduites par Core\Controller. */
+abstract class BooksController extends \Core\Controller
+{
 }

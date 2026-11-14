@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
+/** Les actions et leur configuration sont déduites par Core\Controller. */
 abstract class CategoriesController extends \Core\Controller
 {
-    protected static $table = 'categories';
-    protected static $Manager = \App\Models\CategoriesManager::class;
 }

@@ -1,18 +1,8 @@
 <?php
 
-namespace App\Controllers; 
+namespace App\Controllers;
 
-
-
-
-
-
-abstract class AuthorsController extends \Core\Controller {
-
-protected static $table = 'authors';
-protected static $Manager = \App\Models\AuthorsManager::class;
-
-
-
-
+/** Les actions et leur configuration sont déduites par Core\Controller. */
+abstract class AuthorsController extends \Core\Controller
+{
 }

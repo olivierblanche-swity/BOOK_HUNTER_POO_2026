@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
+/** Les actions et leur configuration sont déduites par Core\Controller. */
 abstract class TagsController extends \Core\Controller
 {
-    protected static $table = 'tags';
-    protected static $Manager = \App\Models\TagsManager::class;
 }

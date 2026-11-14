@@ -13,7 +13,7 @@ $tags = \App\Models\TagsManager::findAll(null, 'name');
     <div class="bg-gray-700 rounded-lg shadow-lg p-4 mt-4">
         <h2 class="font-bold text-lg mb-4">Tags</h2>
         <div class="tag-cloud">
-            <?php include __DIR__ . '/../../tags/index.php'; ?>
+            <?php include __DIR__ . '/../../tags/_cloud.php'; ?>
         </div>
     </div>
 </aside>
