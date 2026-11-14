@@ -13,7 +13,7 @@ switch($_GET['authors']):
 
     default:
 
-    AuthorsController::indexAction();
+    AuthorsController::indexAction(6);
 
     break;
 endswitch;

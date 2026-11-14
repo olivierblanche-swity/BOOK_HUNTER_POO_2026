@@ -13,7 +13,7 @@ switch($_GET['books']):
 
     default:
 
-    BooksController::indexAction();
+    BooksController::indexAction(6);
 
     break;
 endswitch;

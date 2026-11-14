@@ -11,11 +11,11 @@ abstract class Controller
     protected static $table;
     protected static $Manager;
     
-public static function indexAction():void
+public static function indexAction(int $limit):void
 {
     
 
-    ${static::$table} = static::$Manager::findAll();
+    ${static::$table} = static::$Manager::findAll($limit);
 
     
     global $title, $content;

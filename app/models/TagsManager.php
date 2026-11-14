@@ -5,7 +5,7 @@ namespace App\Models;
 use \PDO;
 use Core\DB;
 
-abstract class TagsManager
+abstract class TagsManager extends \Core\Manager
 {
     public static function findAllByBookId(int $id): array
     {
