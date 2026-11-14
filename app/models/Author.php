@@ -5,7 +5,7 @@ namespace App\Models;
 class Author extends \Core\Model
 {
 
-protected $id, $firstname, $lastname, $biography, $picture, $created_at;
+protected $firstname, $lastname, $biography, $picture;
 
 protected $books, $notation;
 

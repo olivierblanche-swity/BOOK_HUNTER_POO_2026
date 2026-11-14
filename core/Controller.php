@@ -25,7 +25,11 @@ public static function showAction(int $id):void
 {
     
 
-    ${substr(static::$table, 0,-1)} = static::$Manager::findOneById($id);
+    // Détermine le nom de la variable au singulier pour la vue :
+    // le ternaire (? :) transforme 'categories' en 'category' ; sinon,
+    // substr(..., 0, -1) retire le dernier caractère ('books' → 'book', 'tags' → 'tag').
+    $variable = static::$table === 'categories' ? 'category' : substr(static::$table, 0, -1);
+    ${$variable} = static::$Manager::findOneById($id);
 
     
     include __DIR__ . '/../app/views/' .static::$table. '/show.php';

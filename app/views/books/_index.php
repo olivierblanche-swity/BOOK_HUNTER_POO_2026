@@ -13,7 +13,7 @@
             <span
             class="bg-white text-gray-800 px-2 py-1 rounded-md text-sm font-semibold absolute top-2 left-2"
             >
-            <?php //echo $book['categoryName']; ?>
+            <?php echo \Core\Helpers::e($book->category->name); ?>
             </span>
             <img
             class="w-full h-48 object-cover"

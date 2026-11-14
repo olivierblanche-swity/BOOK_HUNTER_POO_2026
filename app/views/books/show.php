@@ -28,7 +28,7 @@
                     class="hover:text-red-500 underline font-medium"><?php echo \Core\Helpers::e($book->author->firstname); ?> <?php echo \Core\Helpers::e($book->author->lastname); ?></a>
             </p>
             <p class="text-gray-300 mb-4"><?php echo \Core\Helpers::e(\Core\Helpers::dateFormator($book->publicated_at)); ?></p>
-            <p class="text-gray-300 mb-4">Genre: <?php //echo $book->category; ?></p>
+            <p class="text-gray-300 mb-4">Genre: <?php echo \Core\Helpers::e($book->category->name); ?></p>
             <div class="flex items-center mb-4">
                 <span class="text-yellow-500 mr-1">
                     <i class="fas fa-star"></i>

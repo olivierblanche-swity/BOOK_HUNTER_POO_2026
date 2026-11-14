@@ -55,6 +55,31 @@ protected static $table = 'books';
         return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Book');
     }
 
+    public static function findAllByCategoryId(int $id): array
+    {
+        $sql = 'SELECT b.* FROM books b
+                WHERE b.category_id = :id
+                ORDER BY b.created_at DESC, b.id DESC';
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':id', $id, PDO::PARAM_INT);
+        $rs->execute();
+
+        return $rs->fetchAll(PDO::FETCH_CLASS, Book::class);
+    }
+
+    public static function findAllByTagId(int $id): array
+    {
+        $sql = 'SELECT b.* FROM books b
+                JOIN books_has_tags bht ON bht.book_id = b.id
+                WHERE bht.tag_id = :id
+                ORDER BY b.created_at DESC, b.id DESC';
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':id', $id, PDO::PARAM_INT);
+        $rs->execute();
+
+        return $rs->fetchAll(PDO::FETCH_CLASS, Book::class);
+    }
+
     
 
    
