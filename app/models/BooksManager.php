@@ -8,7 +8,6 @@ use Core\DB;
 abstract class BooksManager extends \Core\Manager 
 {
 
-protected static $table = 'books';
 
 
     public static function findAllPopulars(int $limit = 9): array

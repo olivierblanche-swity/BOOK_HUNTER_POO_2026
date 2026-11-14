@@ -3,14 +3,18 @@
 namespace Core;
 
 
+/** Outils statiques de présentation utilisés dans les vues. */
 abstract class Helpers
 {
+    // Échappe du texte pour le HTML et ses attributs entre guillemets.
+    // ENT_QUOTES traite les deux types de guillemets ; ENT_SUBSTITUTE remplace l'UTF-8 invalide.
     public static function e(?string $text): string
     {
         return htmlspecialchars($text ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 
-    // fonction pour couper dans les textes trop long 
+    // Raccourcit au dernier espace avant la limite, puis ajoute '...'.
+    // strlen/substr comptent ici des octets, pas des caractères Unicode.
 
     public static function truncate($text, $limit = 100)
     {
@@ -24,11 +28,11 @@ abstract class Helpers
         // On cherche la position du dernier espace
         $last_space = strrpos($text, ' ');
 
-        // On recoupe au niveau du dernier espace et on ajoute des points de suspension
+        // Sans espace, strrpos renvoie false : ce code produit alors seulement '...'.
         return substr($text, 0, $last_space) . '...';
     }
 
-    // fonction pour faire les slug
+    // Transforme un titre en segment d'URL : lettres ASCII minuscules, chiffres et tirets.
     public static function slugify(string $text): string
     {
         // Conversion explicite pour un résultat stable avec iconv sous Windows.
@@ -60,7 +64,8 @@ abstract class Helpers
     }
 
 
-    // fonction pour le format des dates 
+    // strtotime interprète la date reçue ; date la reformate selon les codes PHP.
+    // Exemple : 'd/M/Y' affiche le jour, le mois abrégé en anglais et l'année.
 
     public static function dateFormator(string $date, string $format = "d/M/Y"): string
     {

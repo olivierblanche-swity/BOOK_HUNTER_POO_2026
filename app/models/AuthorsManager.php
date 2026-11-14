@@ -6,7 +6,6 @@ use Core\DB;
 
 abstract class AuthorsManager extends \Core\Manager {
 
-Protected static $table = 'authors';
 
     public static function findNotationByAuthorId(int $id)
     {

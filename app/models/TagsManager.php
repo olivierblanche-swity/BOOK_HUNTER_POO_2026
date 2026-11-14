@@ -7,7 +7,6 @@ use Core\DB;
 
 abstract class TagsManager extends \Core\Manager
 {
-    protected static $table = 'tags';
 
     public static function findAllByBookId(int $id): array
     {
