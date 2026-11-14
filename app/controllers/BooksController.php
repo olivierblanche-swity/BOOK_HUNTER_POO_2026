@@ -3,37 +3,17 @@
 namespace App\Controllers; 
 
 
-use \App\Models\BooksManager;
 
 
 
-abstract class BooksController {
 
-public static function indexAction():void
-{
-    
+abstract class BooksController extends \Core\Controller {
 
-    $books = BooksManager::findAll(9);
+protected static $table = 'books';
+protected static $Manager = \App\Models\BooksManager::class;
 
-    
-    global $title, $content;
-    $title = "recent Books";
-    ob_start();
-    include '../app/views/books/index.php';
-    $content = ob_get_clean();
-}
 
-public static function showAction(int $id):void
-{
-    
 
-    $book = BooksManager::findOneById($id);
 
-    
-    global $title, $content;
-    $title = $book->title;
-    ob_start();
-    include '../app/views/books/show.php';
-    $content = ob_get_clean();
-}
+
 }

@@ -1,7 +1,7 @@
 <?php 
 /**
  * @var object $book
- * @var object $author
+ * 
  */
 ?>
 
@@ -19,7 +19,7 @@
             <p class="text-gray-300 mb-4">
                 Par
                 <a
-                    href="authors/<?php echo \Core\Helpers::e($book->author->id); ?>/<?php echo \Core\Helpers::e(\Core\Helpers::slugify($book->author->firstname)); ?>-<?php echo \Core\Helpers::e(\Core\Helpers::slugify($book->author->lastname)); ?>.html"
+                    href="authors/<?php echo \Core\Helpers::e($book->author->id); ?>/<?php echo \Core\Helpers::e(\Core\Helpers::slugify($book->author->firstname . '-' . $book->author->lastname )); ?>.html"
                     class="hover:text-red-500 underline font-medium"><?php echo \Core\Helpers::e($book->author->firstname); ?> <?php echo \Core\Helpers::e($book->author->lastname); ?></a>
             </p>
             <p class="text-gray-300 mb-4"><?php echo \Core\Helpers::e(\Core\Helpers::dateFormator($book->publicated_at)); ?></p>

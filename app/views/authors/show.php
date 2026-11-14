@@ -14,7 +14,7 @@
                 alt="<?php echo \Core\Helpers::e($author->firstname); ?> <?php echo \Core\Helpers::e($author->lastname); ?>" />
         </div>
         <div class="w-full lg:w-2/3 px-1 lg:px-4 mb-4">
-            <h2 class="font-bold text-2xl mb-2"><?php echo \Core\Helpers::e($author->firstname); ?> <?php echo \Core\Helpers::e($author->lastname); ?> <?php echo \Core\Helpers::e($author->lastname); ?></h2>
+            <h2 class="font-bold text-2xl mb-2"><?php echo \Core\Helpers::e($author->firstname); ?> <?php echo \Core\Helpers::e($author->lastname); ?></h2>
             <p class="text-gray-300 mb-4">Biographie:</p>
             <p class="text-gray-300 mb-4">
                 <?php echo \Core\Helpers::e($author->firstname); ?> <?php echo \Core\Helpers::e($author->biography); ?>
