@@ -5,7 +5,7 @@
 <?php \Core\AppTemplate::section('content'); ?>
 <h2 class="text-2xl font-bold mb-4">Recent books</h2>
 
-<?php include '../app/views/books/_index.php'; ?>
+<?php include __DIR__ . '/_index.php'; ?>
 
 <div class="text-center mt-8">
     <button

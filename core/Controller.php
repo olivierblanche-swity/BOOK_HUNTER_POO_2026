@@ -18,7 +18,7 @@ public static function indexAction(int $limit = 10):void
     ${static::$table} = static::$Manager::findAll($limit);
 
     
-    include '../app/views/'. static::$table .'/index.php';
+    include __DIR__ . '/../app/views/'. static::$table .'/index.php';
 }
 
 public static function showAction(int $id):void
@@ -28,7 +28,7 @@ public static function showAction(int $id):void
     ${substr(static::$table, 0,-1)} = static::$Manager::findOneById($id);
 
     
-    include '../app/views/' .static::$table. '/show.php';
+    include __DIR__ . '/../app/views/' .static::$table. '/show.php';
 }
 
 }

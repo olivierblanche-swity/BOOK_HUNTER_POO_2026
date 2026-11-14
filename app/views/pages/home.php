@@ -1,7 +1,7 @@
 
 
-<?php include '../app/views/books/_populars.php'; ?>
+<?php include __DIR__ . '/../books/_populars.php'; ?>
         
-<?php include '../app/views/authors/_populars.php'; ?>
+<?php include __DIR__ . '/../authors/_populars.php'; ?>
 
         

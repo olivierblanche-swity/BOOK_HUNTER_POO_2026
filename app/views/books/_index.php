@@ -24,7 +24,7 @@
             <div class="pb-4 flex flex-wrap gap-2">
                 <?php 
                 $tags = $book->tags; 
-                include '../app/views/tags/_index.php';
+                include __DIR__ . '/../tags/_index.php';
                 ?>
 
             </div>

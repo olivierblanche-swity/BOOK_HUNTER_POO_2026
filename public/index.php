@@ -1,10 +1,8 @@
-<?php 
+<?php
 
-use \App\Controllers;
+require_once __DIR__ . '/../vendor/autoload.php';
 
+\Core\App::start();
 
-
-require_once '../core/init.php';
-
-require_once '../app/routers/index.php';
-require_once '../app/views/templates/default.php';
+require_once __DIR__ . '/../app/routers/index.php';
+require_once __DIR__ . '/../app/views/templates/default.php';

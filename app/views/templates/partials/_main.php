@@ -1,6 +1,6 @@
 <div class="container mx-auto flex flex-wrap pt-4 pb-12 text-white">
     <!-- Aside -->
-    <?php include '../app/views/templates/partials/_aside.php' ?>
+    <?php include __DIR__ . '/_aside.php' ?>
 
 
     <!-- Main content -->

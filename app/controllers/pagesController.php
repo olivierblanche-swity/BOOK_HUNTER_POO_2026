@@ -20,7 +20,7 @@ public static function homeAction():void
     global $title, $content;
     $title = TITLE_HOME;
     ob_start();
-    include '../app/views/pages/home.php';
+    include __DIR__ . '/../views/pages/home.php';
     $content = ob_get_clean();
 }
 
