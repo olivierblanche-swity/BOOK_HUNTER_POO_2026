@@ -13,8 +13,8 @@ abstract class PagesController {
 
 public static function homeAction():void
 {
-    $books = BooksManager::findAll(3);
-    $authors = AuthorsManager::findAll(3);
+    $books = BooksManager::findAllPopulars(3);
+    $authors = AuthorsManager::findAllPopulars(3);
 
     
     global $title, $content;

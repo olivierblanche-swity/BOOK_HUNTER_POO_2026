@@ -35,10 +35,10 @@ RewriteRule ^tags\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.ph
 RewriteRule ^authors\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.php?authors=show&id=$1 [L,QSA]
 
 # ROUTE AUTHORS.INDEX
-# PATTERN authorss/index.html
-# TARGET : index.php?authorss=index
+# PATTERN authors.html
+# TARGET : index.php?authors=index
 
-RewriteRule ^authors/index\.html$ index.php?authors=index [L,QSA]
+RewriteRule ^authors.html$ index.php?authors=index [L,QSA]
 
 #--------------------------------------------
 # ROUTE DES BOOKS
@@ -50,10 +50,10 @@ RewriteRule ^authors/index\.html$ index.php?authors=index [L,QSA]
 RewriteRule ^books\/([1-9][0-9]*)\/[0-9a-z]([a-z0-9\-]*[0-9a-z])*\.html$ index.php?books=show&id=$1 [L,QSA]
 
 # ROUTE BOOKS.INDEX
-# PATTERN books/index.html
+# PATTERN books.html
 # TARGET : index.php?books=index
 
-RewriteRule ^books/index\.html$ index.php?books=index [L,QSA]
+RewriteRule ^books.html$ index.php?books=index [L,QSA]
 
 #-----------------------------
 # FALLBACK

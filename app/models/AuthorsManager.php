@@ -7,7 +7,7 @@ use Core\DB;
 abstract class AuthorsManager {
 
 
-    public static function findAll(int $limit = 9): array
+    public static function findAllPopulars(int $limit = 9): array
     {
         $sql = "SELECT au.*
                         
@@ -39,6 +39,19 @@ abstract class AuthorsManager {
 
         return $rs->fetchObject('\App\Models\Author');
 
+    }
+
+    public static function findAll(int $limit = 10): array
+    {
+        $sql = 'SELECT a.*
+                FROM authors a
+                ORDER BY created_at
+                LIMIT :limit;';
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $rs->execute();
+        
+        return $rs->fetchAll(PDO::FETCH_CLASS, '\App\Models\Author');
     }
 
 

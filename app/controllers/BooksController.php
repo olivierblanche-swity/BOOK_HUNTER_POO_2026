@@ -7,9 +7,9 @@ use \App\Models\BooksManager;
 
 
 
-class BooksController {
+abstract class BooksController {
 
-public function indexAction():void
+public static function indexAction():void
 {
     
 
@@ -17,10 +17,23 @@ public function indexAction():void
 
     
     global $title, $content;
-    $title = "Latest Books & Authors";
+    $title = "recent Books";
     ob_start();
-    include '../app/views/pages/home.php';
+    include '../app/views/books/index.php';
     $content = ob_get_clean();
 }
 
+public static function showAction(int $id):void
+{
+    
+
+    $book = BooksManager::findOneById($id);
+
+    
+    global $title, $content;
+    $title = $book->title;
+    ob_start();
+    include '../app/views/books/show.php';
+    $content = ob_get_clean();
+}
 }

@@ -7,7 +7,7 @@ use Core\DB;
 
 abstract class BooksManager
 {
-    public static function findAll(int $limit = 9): array
+    public static function findAllPopulars(int $limit = 9): array
     {
         $sql = "SELECT b.*
                 FROM books b
@@ -49,6 +49,31 @@ abstract class BooksManager
         $rs->execute();
 
         return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Book');
+    }
+
+    public static function findAll(int $limit = 10): array
+    {
+        $sql = 'SELECT b.*
+                FROM books b
+                ORDER BY created_at
+                LIMIT :limit;';
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $rs->execute();
+        
+        return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Book');
+    }
+
+    public static function findOneById(int $id): object
+    {
+        $sql = 'SELECT b.*
+                FROM books b
+                WHERE id = :id;';
+        $rs = DB::getConnexion()->prepare($sql);
+        $rs->bindValue(':id', $id, PDO::PARAM_INT);
+        $rs->execute();
+        
+        return $rs->fetchObject('\App\Models\Book');
     }
 
 }

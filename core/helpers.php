@@ -5,6 +5,10 @@ namespace Core;
 
 abstract class Helpers
 {
+    public static function e(?string $text): string
+    {
+        return htmlspecialchars($text ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
 
     // fonction pour couper dans les textes trop long 
 
