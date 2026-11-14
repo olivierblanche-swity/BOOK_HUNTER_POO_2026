@@ -1,3 +1,8 @@
+<?php \Core\AppTemplate::section('title'); ?>
+<?php echo TITLE_BOOKS_INDEX; ?>
+<?php \Core\AppTemplate::stop(); ?>
+
+<?php \Core\AppTemplate::section('content'); ?>
 <h2 class="text-2xl font-bold mb-4">Recent books</h2>
 
 <?php include '../app/views/books/_index.php'; ?>
@@ -8,3 +13,4 @@
         Load More
     </button>
 </div>
+<?php \Core\AppTemplate::stop(); ?>

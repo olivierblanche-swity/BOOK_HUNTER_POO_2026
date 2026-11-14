@@ -5,6 +5,11 @@
 ?>
 
 
+<?php \Core\AppTemplate::section('title'); ?>
+<?php echo sprintf(TITLE_AUTHORS_SHOW, $author->firstname, $author->lastname); ?>
+<?php \Core\AppTemplate::stop(); ?>
+
+<?php \Core\AppTemplate::section('content'); ?>
 <div class="bg-gray-700 rounded-lg shadow-lg p-4">
     <div class="flex flex-wrap">
         <div class="w-full lg:w-1/3 px-1 lg:px-4 mb-4">
@@ -39,3 +44,4 @@
         </div>
     </div>
 </div>
+<?php \Core\AppTemplate::stop(); ?>

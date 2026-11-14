@@ -5,7 +5,12 @@
  */
 ?>
 
+<?php \Core\AppTemplate::section('title'); ?>
+<?php echo sprintf(TITLE_BOOKS_SHOW, $book->title); ?>
+<?php \Core\AppTemplate::stop(); ?>
 
+
+<?php \Core\AppTemplate::section('content'); ?>
 <div class="bg-gray-700 rounded-lg shadow-lg p-4">
     <div class="flex flex-wrap">
         <div class="w-full lg:w-1/3 px-1 lg:px-4 mb-4">
@@ -33,7 +38,7 @@
             <div class="flex flex-wrap">
                 <?php foreach($book->tags as $tag): ?>
                 <a
-                    href="tag/<?php echo \Core\Helpers::e($tag->id); ?>/<?php echo \Core\Helpers::e(\core\Helpers::slugify($tag->name)); ?>.html"
+                    href="tags/<?php echo \Core\Helpers::e($tag->id); ?>/<?php echo \Core\Helpers::e(\Core\Helpers::slugify($tag->name)); ?>.html"
                     class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold mr-2 hover:bg-gray-800 hover:text-white"><?php echo \Core\Helpers::e($tag->name); ?></a>
                     <?php endforeach; ?>
                 
@@ -52,3 +57,4 @@
         </p>
     </div>
 </div>
+<?php \Core\AppTemplate::stop(); ?>

@@ -18,7 +18,7 @@ public static function homeAction():void
 
     
     global $title, $content;
-    $title = "Latest Books & Authors";
+    $title = TITLE_HOME;
     ob_start();
     include '../app/views/pages/home.php';
     $content = ob_get_clean();

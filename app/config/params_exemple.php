@@ -3,7 +3,7 @@
 // zone dynamiques
 
 $content = "Oups, la page que vous recherchez n'existe pas !";
-$title = "";
+$title = TITLE_DEFAULT;
 
 // constante de connexion a la base de donnee
 define('DBHOST', ''); 
