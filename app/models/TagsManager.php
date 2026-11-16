@@ -7,6 +7,7 @@ use Core\DB;
 
 abstract class TagsManager extends \Core\Manager
 {
+    protected const SORTABLE_COLUMNS = ['id', 'created_at', 'name'];
 
     public static function findAllByBookId(int $id): array
     {

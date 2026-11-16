@@ -2,3 +2,7 @@
 /app/config/params.php
 
 /vendor/
+
+# Métadonnées locales de continuité
+/.codex/
+/AGENTS.md

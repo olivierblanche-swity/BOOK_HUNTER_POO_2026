@@ -13,7 +13,7 @@
             <span
             class="bg-white text-gray-800 px-2 py-1 rounded-md text-sm font-semibold absolute top-2 left-2"
             >
-            <?php echo \Core\Helpers::e($book->category->name); ?>
+            <?php echo \Core\Helpers::e($book->category->name ?? 'Catégorie non renseignée'); ?>
             </span>
             <img
             class="w-full h-48 object-cover"
@@ -29,12 +29,14 @@
 
             </div>
             <h3 class="text-xl font-bold"><?php echo \Core\Helpers::e($book->title); ?></h3>
-            <h4 class="text mb-2 text-gray-400"><?php echo \Core\Helpers::e($book->author->firstname); ?> <?php echo \Core\Helpers::e($book->author->lastname); ?></h4>
+            <h4 class="text mb-2 text-gray-400"><?php echo $book->author
+                ? \Core\Helpers::e(trim($book->author->firstname . ' ' . $book->author->lastname))
+                : 'Auteur non renseigné'; ?></h4>
             <div class="flex items-center mb-2">
                 <span class="text-yellow-500 mr-1">
                 <i class="fas fa-star"></i>
                 </span>
-                <span><?php echo \Core\Helpers::e($book->notation); ?></span>
+                <span><?php echo \Core\Helpers::e($book->notation ?? 'Pas encore de note'); ?></span>
             </div>
 
             <p class="text-gray-400">

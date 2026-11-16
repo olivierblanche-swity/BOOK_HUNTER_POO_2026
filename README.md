@@ -1,4 +1,37 @@
 # 🧭 GPS — Du framework procédural au framework POO
+
+## État actuel — 16 novembre 2026
+
+Le parcours par étapes ci-dessous est historique. Le code actuel inclut les corrections suivantes :
+
+- `Helpers::truncate()` découpe les caractères UTF-8 et conserve les mots sans espace ; une limite zéro retourne une chaîne vide, une limite négative est rejetée.
+- `Helpers::dateFormator()` accepte une date absente et signale les dates invalides, sans afficher artificiellement janvier 1970.
+- Chaque manager déclare les colonnes SQL autorisées pour le tri ; les relations ne sont pas des colonnes triables.
+- Les livres sans auteur, catégorie ou note affichent un message explicite. Aucun lien auteur incomplet n’est généré. Les cartes auteurs affichent leur moyenne réelle.
+- Le modèle mémorise aussi les relations chargées à null ; `__isset()` permet les valeurs de repli avec `??`.
+- PDO déclare `charset=utf8mb4`. Les tables locales mesurées restent en `utf8mb3_general_ci` : aucune conversion du schéma n’a été effectuée ; les caractères sur quatre octets ne sont donc pas garantis en stockage.
+- La balise `<base>` utilise un chemin depuis la racine, encodé par segment et indépendant de `Host`, du schéma HTTP/HTTPS et des en-têtes de proxy.
+
+Configuration : copier `app/config/params_exemple.php` vers `app/config/params.php`, puis renseigner ses paramètres locaux. Servir `public/` avec Apache et `mod_rewrite` ; garder la configuration privée hors de Git.
+
+### Vérifications exécutées
+
+```powershell
+php -n tests/regressions.php
+php tests/render-regressions.php
+php tests/base-url.php
+php tests/http-smoke.php
+php tests/mysql-readonly.php
+```
+
+Les deux premiers scripts passent respectivement 34 et 11 contrôles isolés ; le script HTTP passe 13 contrôles sur Apache local. Le script MySQL exécute uniquement des lectures, mesure les rendus et vérifie les tris déclarés. Les tests HTTP/MySQL nécessitent les services et la configuration locale ; aucune donnée de test n’est insérée. `http-smoke.php` accepte une autre URL de base en premier argument.
+
+Mesures locales par rendu complet, après corrections (contenu et volumes dépendants du catalogue) : accueil 19 requêtes, livres 27, auteurs 9 ; détails livre 7, auteur 5, catégorie 48, tag 4. Les cartes déclenchent encore des requêtes par objet pour les relations et notes : le problème de lectures répétées est identifié, aucun chargement groupé n’est revendiqué. L’affichage de la vraie note auteur ajoute une lecture par carte par rapport à l’ancienne valeur fixe.
+
+Les fonctions « Load More », collection et liste des catégories restent volontairement incomplètes, conformément au périmètre demandé.
+
+---
+
 ## UE Framework côté serveur — Book Hunter
 
 Ce document est votre **GPS** : pour chaque étape, il indique la **destination**, un **itinéraire** et des **indices**. Il ne donne **pas le code** : c'est à vous de le trouver (documentation PHP, notes de cours, IA… toutes les ressources sont permises, à condition de **comprendre** ce que vous écrivez).
@@ -13,7 +46,7 @@ Ce document est votre **GPS** : pour chaque étape, il indique la **destination*
 
 1. Cloner le dépôt et se placer sur `step-01`.
 2. Importer `documents/db/db_remplie.sql` dans MySQL (base `book_hunter_2025`).
-3. Dès l'étape 2 : copier `app/config/params-example.php` en `app/config/params.php` et le compléter avec **vos** paramètres. Ce fichier est ignoré par git : il ne doit **jamais** être commité.
+3. Dès l'étape 2 : copier `app/config/params_exemple.php` en `app/config/params.php` et le compléter avec **vos** paramètres. Ce fichier est ignoré par git : il ne doit **jamais** être commité.
 4. Dès l'étape 4 : `composer dump-autoload` (crée le dossier `vendor/`, lui aussi ignoré par git). À refaire chaque fois que `composer.json` change.
 5. Servir le dossier `public/` (Apache + `mod_rewrite`). Si le site n'est pas à la racine, c'est normal : le projet gère le sous-dossier.
 

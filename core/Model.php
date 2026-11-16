@@ -7,6 +7,7 @@ abstract class Model
 {
     // protected permet aux modèles enfants d'utiliser ces propriétés héritées.
     protected $id, $created_at;
+    private array $loadedRelations = [];
 
     // PHP appelle __get lorsqu'une propriété inaccessible est lue depuis l'extérieur.
     // Les relations doivent être déclarées protected dans les modèles enfants.
@@ -14,12 +15,13 @@ abstract class Model
     {
         if (property_exists($this, $property)) {
             // Une valeur déjà chargée est réutilisée, y compris un tableau vide.
-            // Si le chargement renvoie null, une prochaine lecture fera une nouvelle tentative.
-            if ($this->$property === null) {
+            // Une relation absente ou une moyenne null ne doit être lue qu'une fois.
+            if ($this->$property === null && !isset($this->loadedRelations[$property])) {
                 $methodName = 'set' . ucfirst($property);
                 // Les setters spécifiques (tags, notation, books) passent avant la convention.
                 if (method_exists($this, $methodName)) {
                     $this->$methodName();
+                    $this->loadedRelations[$property] = true;
                 } else {
                     // Convention : author → author_id → AuthorsManager.
                     // Category a un pluriel particulier : CategoriesManager.
@@ -29,7 +31,9 @@ abstract class Model
 
                     // Charge une relation simple seulement si sa clé et son manager existent.
                     if (property_exists($this, $foreignKey) && class_exists($manager)) {
-                        $this->$property = $manager::findOneById($this->$foreignKey);
+                        $this->$property = $this->$foreignKey === null
+                            ? false : $manager::findOneById($this->$foreignKey);
+                        $this->loadedRelations[$property] = true;
                     }
                 }
             }
@@ -37,5 +41,11 @@ abstract class Model
             return $this->$property;
         }
         // Une propriété non déclarée donne implicitement null.
+    }
+
+    // Permet ?? dans les vues tout en respectant le chargement différé.
+    public function __isset(string $property): bool
+    {
+        return $this->__get($property) !== null;
     }
 }

@@ -5,6 +5,7 @@ use \PDO;
 use Core\DB;
 
 abstract class AuthorsManager extends \Core\Manager {
+    protected const SORTABLE_COLUMNS = ['id', 'created_at', 'firstname', 'lastname', 'biography', 'picture'];
 
 
     public static function findNotationByAuthorId(int $id)

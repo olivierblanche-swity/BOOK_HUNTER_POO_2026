@@ -8,6 +8,9 @@ abstract class Manager
 
 
 {
+    // Chaque manager concret déclare les seules colonnes SQL triables.
+    protected const SORTABLE_COLUMNS = ['id', 'created_at'];
+
     private static function init(): array
     {
         // static::class désigne le manager appelé, par exemple BooksManager.
@@ -27,8 +30,7 @@ abstract class Manager
     {
         [$table, $model] = static::init();
         // Un nom de colonne ne se lie pas comme une valeur PDO : on le vérifie avant insertion.
-        // Cette convention suppose que la propriété demandée correspond à une colonne SQL.
-        if (!property_exists($model, $orderBy)) {
+        if (!in_array($orderBy, static::SORTABLE_COLUMNS, true)) {
             throw new \InvalidArgumentException('Colonne de tri inconnue : ' . $orderBy);
         }
         if ($limit !== null && $limit < 0) {

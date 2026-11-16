@@ -14,22 +14,24 @@ abstract class Helpers
     }
 
     // Raccourcit au dernier espace avant la limite, puis ajoute '...'.
-    // strlen/substr comptent ici des octets, pas des caractères Unicode.
-
-    public static function truncate($text, $limit = 100)
+    // Le découpage Unicode ne nécessite pas l'extension mbstring.
+    public static function truncate(string $text, int $limit = 100): string
     {
-        if (strlen($text) <= $limit)
+        if ($limit < 0) {
+            throw new \InvalidArgumentException('La limite doit être positive ou nulle.');
+        }
+        if (preg_match_all('/./us', $text, $characters) === false) {
+            throw new \InvalidArgumentException('Le texte doit être en UTF-8 valide.');
+        }
+        if (count($characters[0]) <= $limit)
             return $text;
-
-
-        // On coupe d'abord à la limite brute
-        $text = substr($text, 0, $limit);
-
-        // On cherche la position du dernier espace
+        if ($limit === 0) {
+            return '';
+        }
+        $text = implode('', array_slice($characters[0], 0, $limit));
         $last_space = strrpos($text, ' ');
-
-        // Sans espace, strrpos renvoie false : ce code produit alors seulement '...'.
-        return substr($text, 0, $last_space) . '...';
+        return rtrim($last_space !== false && $last_space > 0
+            ? substr($text, 0, $last_space) : $text) . '...';
     }
 
     // Transforme un titre en segment d'URL : lettres ASCII minuscules, chiffres et tirets.
@@ -64,11 +66,26 @@ abstract class Helpers
     }
 
 
-    // strtotime interprète la date reçue ; date la reformate selon les codes PHP.
-    // Exemple : 'd/M/Y' affiche le jour, le mois abrégé en anglais et l'année.
-
-    public static function dateFormator(string $date, string $format = "d/M/Y"): string
+    // Par défaut : jour, mois français en entier et année (ex. 16 novembre 2026).
+    // Un format PHP explicite reste disponible pour les dates numériques.
+    public static function dateFormator(?string $date, ?string $format = null): string
     {
-        return date($format, strtotime($date));
+        if ($date === null || trim($date) === '') {
+            return 'Date non renseignée';
+        }
+        $timestamp = strtotime($date);
+        $errors = date_parse($date);
+        if ($timestamp === false || $errors['warning_count'] > 0 || $errors['error_count'] > 0) {
+            return 'Date invalide';
+        }
+        if ($format !== null) {
+            return date($format, $timestamp);
+        }
+        $months = [
+            1 => 'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+            'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',
+        ];
+        return date('j', $timestamp) . ' ' . $months[(int) date('n', $timestamp)]
+            . ' ' . date('Y', $timestamp);
     }
 }

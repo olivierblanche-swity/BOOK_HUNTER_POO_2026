@@ -7,6 +7,7 @@ use Core\DB;
 
 abstract class BooksManager extends \Core\Manager 
 {
+    protected const SORTABLE_COLUMNS = ['id', 'created_at', 'title', 'publicated_at', 'resume', 'isbn', 'cover', 'author_id', 'category_id'];
 
 
 

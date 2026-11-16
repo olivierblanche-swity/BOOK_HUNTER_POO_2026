@@ -15,7 +15,7 @@ public static function setConnexion()
     if (!SELF::$connexionIsDefined):
         // Les constantes de connexion sont définies dans app/config/params.php.
         SELF::$connexion = new \PDO(
-            'mysql:host=' . DBHOST . ';dbname=' . DBNAME,
+            'mysql:host=' . DBHOST . ';dbname=' . DBNAME . ';charset=utf8mb4',
             DBUSER,
             DBPWD
         );

@@ -23,17 +23,21 @@
             <h2 class="font-bold text-2xl mb-2"><?php echo \Core\Helpers::e($book->title); ?></h2>
             <p class="text-gray-300 mb-4">
                 Par
+                <?php if ($book->author): ?>
                 <a
                     href="authors/<?php echo \Core\Helpers::e($book->author->id); ?>/<?php echo \Core\Helpers::e(\Core\Helpers::slugify($book->author->firstname . '-' . $book->author->lastname )); ?>.html"
                     class="hover:text-red-500 underline font-medium"><?php echo \Core\Helpers::e($book->author->firstname); ?> <?php echo \Core\Helpers::e($book->author->lastname); ?></a>
+                <?php else: ?>
+                    Auteur non renseigné
+                <?php endif; ?>
             </p>
             <p class="text-gray-300 mb-4"><?php echo \Core\Helpers::e(\Core\Helpers::dateFormator($book->publicated_at)); ?></p>
-            <p class="text-gray-300 mb-4">Genre: <?php echo \Core\Helpers::e($book->category->name); ?></p>
+            <p class="text-gray-300 mb-4">Genre: <?php echo \Core\Helpers::e($book->category->name ?? 'Catégorie non renseignée'); ?></p>
             <div class="flex items-center mb-4">
                 <span class="text-yellow-500 mr-1">
                     <i class="fas fa-star"></i>
                 </span>
-                <span><?php echo \Core\Helpers::e($book->notation); ?></span>
+                <span><?php echo \Core\Helpers::e($book->notation ?? 'Pas encore de note'); ?></span>
             </div>
             <div class="flex flex-wrap">
                 <?php foreach($book->tags as $tag): ?>

@@ -18,7 +18,7 @@
                 <h3 class="text-xl font-bold mb-2"><?php echo \Core\Helpers::e($author->firstname); ?> <?php echo \Core\Helpers::e($author->lastname); ?></h3>
                 <div class="flex items-center mb-2">
                     <span class="text-yellow-500 mr-1"><i class="fas fa-star"></i></span>
-                    <span>8.9</span>
+                    <span><?php echo \Core\Helpers::e($author->notation ?? 'Pas encore de note'); ?></span>
                 </div>
                 <p class="text-gray-400">
                     <?php echo \Core\Helpers::e($author->biography); ?>
