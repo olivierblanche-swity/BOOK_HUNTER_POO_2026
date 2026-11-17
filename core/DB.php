@@ -5,7 +5,9 @@ namespace Core;
 /** Centralise la connexion PDO utilisée par tous les managers pendant la requête. */
 abstract class DB{
     // Les propriétés statiques conservent leur valeur entre les appels de méthodes.
+    /** @var \PDO|null */
     private static $connexion = null;
+    /** @var bool */
     private static $connexionIsDefined = false;
 
 public static function setConnexion() 

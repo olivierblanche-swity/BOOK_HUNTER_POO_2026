@@ -24,7 +24,7 @@ abstract class BooksManager extends \Core\Manager
         $rs->bindValue(':limit', $limit, PDO::PARAM_INT);
         $rs->execute();
 
-        return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Book');
+        return $rs->fetchAll(PDO::FETCH_CLASS, book::class);
     }
 
     public static function findNotationByBookId(int $id) 
@@ -52,7 +52,7 @@ abstract class BooksManager extends \Core\Manager
         $rs->bindValue(':id', $id, PDO::PARAM_INT);
         $rs->execute();
 
-        return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Book');
+        return $rs->fetchAll(PDO::FETCH_CLASS, book::class);
     }
 
     public static function findAllByCategoryId(int $id): array
@@ -79,9 +79,5 @@ abstract class BooksManager extends \Core\Manager
 
         return $rs->fetchAll(PDO::FETCH_CLASS, Book::class);
     }
-
-    
-
-   
 
 }

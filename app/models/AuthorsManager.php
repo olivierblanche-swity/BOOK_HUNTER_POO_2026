@@ -38,7 +38,7 @@ abstract class AuthorsManager extends \Core\Manager {
         $rs->bindValue(':limit', $limit, PDO::PARAM_INT);
         $rs->execute();
 
-        return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Author');
+        return $rs->fetchAll(PDO::FETCH_CLASS, Author::class);
 
 
     }

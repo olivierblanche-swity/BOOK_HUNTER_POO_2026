@@ -6,7 +6,13 @@ namespace Core;
 abstract class Model
 {
     // protected permet aux modèles enfants d'utiliser ces propriétés héritées.
-    protected $id, $created_at;
+    /** @var int|null */
+    protected $id;
+
+    /** @var string|null */
+    protected $created_at;
+
+    /** @var array<string, bool> */
     private array $loadedRelations = [];
 
     // PHP appelle __get lorsqu'une propriété inaccessible est lue depuis l'extérieur.

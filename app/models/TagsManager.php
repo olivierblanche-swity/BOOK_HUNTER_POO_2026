@@ -20,7 +20,7 @@ abstract class TagsManager extends \Core\Manager
         $rs->bindValue(':id', $id, PDO::PARAM_INT);
         $rs->execute();
 
-        return $rs->fetchAll(PDO::FETCH_CLASS,'\App\Models\Tag');
+        return $rs->fetchAll(PDO::FETCH_CLASS, Tag::class);
 
 
     }

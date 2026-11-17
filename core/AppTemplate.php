@@ -6,6 +6,7 @@ namespace Core;
 abstract class AppTemplate
 {
     // Une seule section peut être capturée à la fois : les sections ne sont pas imbriquées.
+    /** @var string|null */
     private static $currentSection;
 
     public static function section(string $section): void
