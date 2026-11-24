@@ -30,9 +30,8 @@ abstract class Model
                     $this->loadedRelations[$property] = true;
                 } else {
                     // Convention : author → author_id → AuthorsManager.
-                    // Category a un pluriel particulier : CategoriesManager.
                     $foreignKey = $property . '_id';
-                    $plural = $property === 'category' ? 'categories' : $property . 's';
+                    $plural = Inflect::pluralize($property);
                     $manager = '\\App\\Models\\' . ucfirst($plural) . 'Manager';
 
                     // Charge une relation simple seulement si sa clé et son manager existent.

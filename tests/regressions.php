@@ -19,12 +19,27 @@ namespace Core {
     }
 }
 
+namespace App\Models {
+    class StoriesManager {
+        public static function findOneById($id): string {
+            return 'story ' . $id;
+        }
+    }
+}
+
 namespace {
     require __DIR__ . '/../core/Helpers.php';
+    require __DIR__ . '/../core/Inflect.php';
     require __DIR__ . '/../core/Manager.php';
+    require __DIR__ . '/../core/Model.php';
     foreach (['Books', 'Authors', 'Categories', 'Tags'] as $name) {
         require __DIR__ . '/../app/models/' . $name . 'Manager.php';
     }
+    class StoryRelationModel extends \Core\Model {
+        protected $story;
+        protected $story_id = 42;
+    }
+
     $checks = 0;
     function check(bool $condition): void {
         global $checks;
@@ -41,6 +56,7 @@ namespace {
     check(\Core\Helpers::dateFormator('date-invalide') === 'Date invalide');
     check(\Core\Helpers::dateFormator('2026-02-30') === 'Date invalide');
     check(\Core\Helpers::dateFormator('2026-11-16', 'd/m/Y') === '16/11/2026');
+    check((new StoryRelationModel())->story === 'story 42');
     foreach ([1 => 'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
         'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $month => $name) {
         check(\Core\Helpers::dateFormator(sprintf('2026-%02d-01', $month)) === '1 ' . $name . ' 2026');
